@@ -1,0 +1,260 @@
+body {
+  padding: 10px;
+  background-color: white;
+}
+
+.card-section{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 30px;
+  border: 1px solid rgba(230, 230, 230, 1);;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  width: 500px;
+  gap: 0px;
+}
+
+.card-row{
+  display: flex;
+  gap: 25px;
+}
+
+.card-header h1{
+  margin: 0px 0px 2px 0px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-refresh {
+  margin: 0px 0px 10px 0px;
+}
+
+.refresh-button {
+  display: flex;
+  align-items: center;
+  padding: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  gap: 7px;
+}
+
+.refresh-button span{
+  padding: 0px;
+  margin: 0px;
+  color: grey;
+}
+.refresh-icon {
+  width: 17px;
+  height: 17px;
+  stroke: rgba(0, 0, 0, 0.5);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.refresh-button:hover .refresh-icon{
+  animation-duration: 1s;
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card-info {
+  /* background-color:bisque; */
+}
+
+.thumbnail-container {
+  width: 130px;
+  height: 130px;
+  border-radius: 10%;
+  overflow: hidden;
+  /* background-color: red; */
+}
+
+.thumbnail-container:hover .thumbnail-image {
+  transform: scale(1.08); 
+}
+
+.thumbnail-image {
+  opacity: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; 
+  transition: transform 0.3s ease; 
+}
+
+.card-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-around;
+  /* background-color: #38cdff; */
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: lightgray;
+  width: 85%;
+  margin: 0;
+}
+
+.price-format {
+  align-items: center;
+  gap: 10px;
+  /* background-color: aqua; */
+}
+
+.price-symbol {
+  vertical-align: top;
+  font-size: large;
+}
+
+.price-whole {
+  font-size:xx-large;
+  line-height: 1; 
+}
+
+.price-part {
+  vertical-align: top;
+  font-size: large;
+}
+
+.delta {
+  font-size:large;
+  font-weight:600;
+  padding: 5px 8px;
+  border-radius: 10px;
+  color: #BB4444;
+  color: #489361;
+  background-color: #FCE8E6;
+  background-color: #E6F4EA;
+}
+
+.price-arrow {
+  width: 20px;
+  height: 20px;
+  stroke-width: 0px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: #BB4444;
+  fill: #489361;
+}
+
+.delta-price {
+  font-size:x-large;
+  font-weight:500;
+  color: #BB4444;
+  color: #489361;
+}
+
+/*BREAK HERE*/
+
+.record-id {
+  font-size: medium;
+  line-height: 1;
+  width: 25px;
+}
+
+.price-record .price-symbol {
+  vertical-align: top;
+  font-size: medium;
+}
+
+.price-record .price-whole {
+  font-size:x-large;
+  line-height: 1; 
+}
+
+.price-record .price-part {
+  vertical-align: top;
+  font-size: medium;
+}
+
+.price-record .delta {
+  font-size:medium;
+  font-weight:500;
+  padding: 3px 5px;
+  border-radius: 10px;
+  color: #BB4444;
+  color: #489361;
+  background-color: #FCE8E6;
+  background-color: #E6F4EA;
+}
+
+.price-record .price-arrow {
+  width: 15px;
+  height: 15px;
+  stroke-width: 0px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: #BB4444;
+  fill: #489361;
+}
+
+.price-record .delta-price {
+  font-size:large;
+  font-weight:500;
+  color: #BB4444;
+  color: #489361;
+}
+
+.chart {
+  flex-grow: 1;
+  width: 0;
+  height: 100%
+}
+
+.price-action {
+  margin: 0px;
+}
+
+.card-buttons {
+  justify-content: end;
+}
+
+.card-buttons button {
+  font-size: medium;
+  border-style: none;
+  height: 35px;
+  width: 200px;
+  border-radius: 50px;
+}
+
+.visit-listing {
+  background-color: #FFA41C;
+}
+
+.visit-listing:hover {
+  background-color: #FF8400;
+}
+
+.untrack-item {
+  background-color: #38cdff;
+}
+
+.untrack-item:hover {
+  background-color: #00bfff;
+}

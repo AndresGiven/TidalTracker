@@ -1,0 +1,12 @@
+.tidal-button {
+  color: black;
+  background-color:#38cdff;
+  border-style: none;
+  height: 32px;
+  width: 100%;
+  border-radius: 100px;
+}
+
+.tidal-button:hover {
+  background-color: #00bfff;
+}

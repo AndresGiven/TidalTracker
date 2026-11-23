@@ -1,0 +1,30 @@
+{
+  "name": "Tidal Price Tracker",
+  "description": "Convienent way to track the price of amazon listings over time without checking the site!",
+  "version": "1.0",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://*.amazon.ca/*/dp/*", "https://*.amazon.ca/dp/*",
+                  "https://*.amazon.ca/gp/product*", "https://*.amazon.ca/*/gp/product/*"],
+      "css": ["css/my-styles.css"],
+      "js": ["js/tidal-content-script.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Click to open panel"
+  },
+  "side_panel": {
+    "default_path": "panel.html"
+  },
+  "background": {
+    "service_worker": "js/service-worker.js",
+    "type": "module"
+  },
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "offscreen"
+  ]
+}

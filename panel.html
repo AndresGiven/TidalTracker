@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/panel.css">
+    <title>Tidal Tracker</title>
+  </head>
+  <body>
+    <div class="card-section">
+
+      <div class="card">
+
+        <div class="card-row card-header">
+          <h1>Lorit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit</h1>
+        </div>
+
+        <div class="card-row card-refresh">
+          <button class="refresh-button">
+            <svg class="refresh-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M12 21C7.02944 21 3 16.9706 3 12C3 9.69494 3.86656 7.59227 5.29168 6L8 3M12 3C16.9706 3 21 7.02944 21 12C21 14.3051 20.1334 16.4077 18.7083 18L16 21M3 3H8M8 3V8M21 21H16M16 21V16"/>
+            </svg>
+            <span>Amazon &bull; Last updated 2 minutes ago</span>
+          </button>
+        </div>
+
+
+        <div class="card-row card-info">
+
+          <div class="thumbnail-container">
+            <img class="thumbnail-image" src="assets/lucyCyberPunk.jpg">
+          </div>
+
+          <div class="card-column">
+
+            <div class="card-row price-format">
+              <div>
+                <span class="price-symbol">$</span>
+                <span class="price-whole">9999</span>
+                <span class="price-part">99</span>
+              </div>
+              <span class="delta">-99.99%</span>
+              <div>
+                <svg class="price-arrow" viewBox="0 0 512 512" transform="matrix(1, 0, 0, -1, 0, 0)">
+                  <path d="M246.312928,5.62892705 C252.927596,9.40873724 258.409564,14.8907053 262.189374,21.5053731 L444.667042,340.84129 C456.358134,361.300701 449.250007,387.363834 428.790595,399.054926 C422.34376,402.738832 415.04715,404.676552 407.622001,404.676552 L42.6666667,404.676552 C19.1025173,404.676552 7.10542736e-15,385.574034 7.10542736e-15,362.009885 C7.10542736e-15,354.584736 1.93772021,347.288125 5.62162594,340.84129 L188.099293,21.5053731 C199.790385,1.04596203 225.853517,-6.06216498 246.312928,5.62892705 Z"/>
+                </svg>
+                <span class="delta-price">99.99</span>
+              </div>
+            </div>
+            <hr>
+            <div class="card-row price-format price-record">
+              <span class="record-id">ATH</span>
+              <div>
+                <span class="price-symbol">$</span>
+                <span class="price-whole">9999</span>
+                <span class="price-part">99</span>
+              </div>
+              <span class="delta">-99.99%</span>
+              <div>
+                <svg class="price-arrow" viewBox="0 0 512 512" transform="matrix(1, 0, 0, -1, 0, 0)">
+                  <path d="M246.312928,5.62892705 C252.927596,9.40873724 258.409564,14.8907053 262.189374,21.5053731 L444.667042,340.84129 C456.358134,361.300701 449.250007,387.363834 428.790595,399.054926 C422.34376,402.738832 415.04715,404.676552 407.622001,404.676552 L42.6666667,404.676552 C19.1025173,404.676552 7.10542736e-15,385.574034 7.10542736e-15,362.009885 C7.10542736e-15,354.584736 1.93772021,347.288125 5.62162594,340.84129 L188.099293,21.5053731 C199.790385,1.04596203 225.853517,-6.06216498 246.312928,5.62892705 Z"/>
+                </svg>
+                <span class="delta-price">99.99</span>
+              </div>
+            </div>
+
+            <div class="card-row price-format price-record">
+              <span class="record-id">ATL</span>
+              <div>
+                <span class="price-symbol">$</span>
+                <span class="price-whole">9999</span>
+                <span class="price-part">99</span>
+              </div>
+              <span class="delta">-99.99%</span>
+              <div>
+                <svg class="price-arrow" viewBox="0 0 512 512" transform="matrix(1, 0, 0, -1, 0, 0)">
+                  <path d="M246.312928,5.62892705 C252.927596,9.40873724 258.409564,14.8907053 262.189374,21.5053731 L444.667042,340.84129 C456.358134,361.300701 449.250007,387.363834 428.790595,399.054926 C422.34376,402.738832 415.04715,404.676552 407.622001,404.676552 L42.6666667,404.676552 C19.1025173,404.676552 7.10542736e-15,385.574034 7.10542736e-15,362.009885 C7.10542736e-15,354.584736 1.93772021,347.288125 5.62162594,340.84129 L188.099293,21.5053731 C199.790385,1.04596203 225.853517,-6.06216498 246.312928,5.62892705 Z"/>
+                </svg>
+                <span class="delta-price">99.99</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="card-row price-action">
+          <div class="chart">
+            <canvas id="priceAction"></canvas>
+          </div>
+        </div>
+
+        <div class="card-row card-buttons">
+          <button class="untrack-item">Untrack</button>
+          <button class="visit-listing">Visit Amazon</button>
+        </div>
+
+      </div>
+      
+    </div>
+
+    <script src="lib/chart.umd.min.js"></script>
+    <script src="js/panel.js"></script>
+  </body>
+</html>
