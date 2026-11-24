@@ -2,10 +2,22 @@ chrome.sidePanel
   .setPanelBehavior({ openPanelOnActionClick: true})
   .catch((error) => console.error(error));
 
-
 function handleMessage(message, sender, sendResponse){
+  const TYPES = ["track"]
+  const type = message?.type
+  if (!(TYPES.includes(type))){
+    return false;
+  }
+  switch (type) {
+    case "track":
+      track(message, sendResponse)
+        .then((result) => sendResponse({"ok": true, ...result}))
+        .catch((e) => sendResponse({"ok": false, "error": e.message}));
+      return true
+  }
+}
 
-  console.log(sender)
+async function track(message, sendResponse) {
   const trackDate = Date.now();
   const storedData = (chrome.storage.local.get(message.asin))[message.asin]
 
@@ -18,18 +30,8 @@ function handleMessage(message, sender, sendResponse){
       "history": [...(storedData?.history ?? []), {"date": trackDate, "price": message.price}]
     }
   })
-    .then(() =>{
-      sendResponse(200)
-    })
-    .catch((e) => {
-      sendResponse(400)
-    });
 
   return true;
 }
 
 chrome.runtime.onMessage.addListener(handleMessage)
-
-// chrome.offscreen.createDocument({
-
-// })
