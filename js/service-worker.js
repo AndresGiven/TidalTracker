@@ -17,21 +17,19 @@ function handleMessage(message, sender, sendResponse){
   }
 }
 
-async function track(message, sendResponse) {
+async function track(message) {
   const trackDate = Date.now();
-  const storedData = (chrome.storage.local.get(message.asin))[message.asin]
+  const storedData = (await chrome.storage.local.get(message.asin))[message.asin]
 
   if((new Date(trackDate)).toDateString() == (new Date(storedData?.history.at(-1).date))?.toDateString()) storedData.history.pop();
 
 
-  chrome.storage.local.set({
+  await chrome.storage.local.set({
     [message.asin]: {
       "title": message.asin,
       "history": [...(storedData?.history ?? []), {"date": trackDate, "price": message.price}]
     }
   })
-
-  return true;
 }
 
 chrome.runtime.onMessage.addListener(handleMessage)
