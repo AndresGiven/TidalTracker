@@ -22,7 +22,7 @@ function renderTrackButton(){
 async function onTrackPrice(){
   const asin = extractAsin();
   const price = extractPrice();
-  const data = {"asin": asin, "price": price}
+  const data = {"type": "track", "asin": asin, "price": price}
   const response = await chrome.runtime.sendMessage(data);
   console.log(response)
 }
