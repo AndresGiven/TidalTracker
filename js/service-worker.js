@@ -10,7 +10,7 @@ function handleMessage(message, sender, sendResponse){
   }
   switch (type) {
     case "track":
-      track(message, sendResponse)
+      track(message)
         .then((result) => sendResponse({"ok": true, ...result}))
         .catch((e) => sendResponse({"ok": false, "error": e.message}));
       return true
@@ -20,17 +20,24 @@ function handleMessage(message, sender, sendResponse){
 async function track(message) {
   const trackDate = Date.now();
   const storedData = (await chrome.storage.local.get(message.asin))[message.asin]
-
   if((new Date(trackDate)).toDateString() == (new Date(storedData?.history.at(-1).date))?.toDateString()) storedData.history.pop();
 
 
   await chrome.storage.local.set({
     [message.asin]: {
       "title": message.title,
+      "image": message.image,
+      "url": craftUrl(message.asin),
+      "addedAt": storedData?.addedAt ?? storedData?.history[0]?.date ?? trackDate,
       "history": [...(storedData?.history ?? []), {"date": trackDate, "price": message.price}],
-      "image": message.image
+      "lastChecked": trackDate,
+      "lastError": message.price == null ? "No price available at the moment." : null
     }
   })
+}
+
+function craftUrl(asin){
+  return `${location.origin}/dp/${asin}`
 }
 
 chrome.runtime.onMessage.addListener(handleMessage)
