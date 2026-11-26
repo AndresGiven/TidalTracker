@@ -8,7 +8,7 @@
       "matches": ["https://*.amazon.ca/*/dp/*", "https://*.amazon.ca/dp/*",
                   "https://*.amazon.ca/gp/product*", "https://*.amazon.ca/*/gp/product/*"],
       "css": ["css/my-styles.css"],
-      "js": ["js/tidal-content-script.js"],
+      "js": ["js/listing-parser.js", "js/tidal-content-script.js"],
       "run_at": "document_idle"
     }
   ],
