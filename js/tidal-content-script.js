@@ -22,7 +22,8 @@ function renderTrackButton(){
 async function onTrackPrice(){
   const asin = extractAsin();
   const price = extractPrice();
-  const data = {"type": "track", "asin": asin, "price": price}
+  const title = extractTitle();
+  const data = {"type": "track", "title": title,"asin": asin, "price": price}
   const response = await chrome.runtime.sendMessage(data);
   console.log(response)
 }
@@ -48,6 +49,13 @@ function extractPrice(){
   // e.g. "$199.00 with 34 percent savings" becomes "199.0034"
   //this behavior seems predictable and thus truncating the price lgtm
   return Math.trunc(priceFloat * 100) / 100;
+}
+
+function extractTitle(){
+  const desktopTitle = document.getElementById("productTitle")
+  const mobileTitle = document.getElementById("title")
+  const titleText = (desktopTitle ?? mobileTitle).textContent.trim()
+  return titleText
 }
 
 const targetNode = document.getElementById("ppd");
