@@ -20,9 +20,10 @@ function renderTrackButton(){
 }
 
 async function onTrackPrice(){
+  const price = extractPrice();
+  if (!price) return;
   const title = extractTitle();
   const asin = extractAsin();
-  const price = extractPrice();
   const image = extractImage();
   const data = {"type": "track", "title": title,"asin": asin, "price": price, "image": image}
   const response = await chrome.runtime.sendMessage(data);
@@ -38,18 +39,39 @@ function extractAsin(){
   const match = window.location.pathname.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})/);
   return match ? match[1] : null;
 }
+function extractPrice() {
 
-function extractPrice(){
-  //extract the price from the page
-  const desktopPrice = document.getElementById("corePrice_feature_div")?.querySelector(".a-offscreen");
-  const mobilePrice = document.getElementById("apex-pricetopay-accessibility-label");
-  const priceText = (desktopPrice ?? mobilePrice).textContent.replace(/[^0-9.]/g, "");
-  //extremely sketchy OR operator but I think it should work in all contexts? false || false, not really sure why it works
-  const priceFloat = (Number.parseFloat(priceText) || 0);
-  //mobile price accessability class contains discount info muddling the final sale price, cutting decimals is hacky but effecitve
-  // e.g. "$199.00 with 34 percent savings" becomes "199.0034"
-  //this behavior seems predictable and thus truncating the price lgtm
-  return Math.trunc(priceFloat * 100) / 100;
+  const selectors = [
+    "#corePriceDisplay_desktop_feature_div .priceToPay .a-offscreen",
+    "#corePriceDisplay_desktop_feature_div .priceToPay .aok-offscreen",
+    "#corePrice_feature_div .a-offscreen",
+    "#corePriceDisplay_desktop_feature_div .a-offscreen",
+    "#apex_desktop .a-offscreen",
+    "#apex-pricetopay-accessibility-label",
+    "#price_inside_buybox",
+    "#kindle-price",
+  ];
+
+  for (const selector of selectors) {
+    const price = parsePrice(document.querySelector(selector)?.textContent);
+    if (price) return price;
+  }
+
+  // some layouts only render the visible whole/fraction spans
+  const whole = document.querySelector(".priceToPay .a-price-whole");
+  if (whole) {
+    const fraction = document.querySelector(".priceToPay .a-price-fraction");
+    const digits = (el) => (el?.textContent ?? "").replace(/\D/g, "");
+    return parsePrice(`${digits(whole)}.${digits(fraction) || "00"}`);
+  }
+  return null;
+}
+
+function parsePrice(text) {
+  if (!text) return null;
+  const match = text.replace(/,/g, "").match(/\d+(?:\.\d{1,2})?/);
+  const price = match ? Number(match[0]) : NaN;
+  return Number.isFinite(price) && price > 0 ? price : null;
 }
 
 function extractImage(){
