@@ -14,16 +14,17 @@ function renderTrackButton(){
 
   //identify a suitable position to place the button
   const buyNow = document.getElementById("buyNow_feature_div");
-    const addToCart = document.getElementById("addToCart_feature_div");
+  const addToCart = document.getElementById("addToCart_feature_div");
   const addToAutoBuy = document.getElementById("digital-dash-create-high-prominence");
   (buyNow ?? addToCart ?? addToAutoBuy )?.insertAdjacentElement("afterend", button);
 }
 
 async function onTrackPrice(){
+  const title = extractTitle();
   const asin = extractAsin();
   const price = extractPrice();
-  const title = extractTitle();
-  const data = {"type": "track", "title": title,"asin": asin, "price": price}
+  const image = extractImage();
+  const data = {"type": "track", "title": title,"asin": asin, "price": price, "image": image}
   const response = await chrome.runtime.sendMessage(data);
   console.log(response)
 }
@@ -51,11 +52,26 @@ function extractPrice(){
   return Math.trunc(priceFloat * 100) / 100;
 }
 
+function extractImage(){
+
+}
+
 function extractTitle(){
   const desktopTitle = document.getElementById("productTitle")
   const mobileTitle = document.getElementById("title")
   const titleText = (desktopTitle ?? mobileTitle).textContent.trim()
   return titleText
+}
+
+function extractImage() {
+  const img = document.querySelector("#landingImage, #imgBlkFront, #ebooksImgBlkFront, #main-image");
+  if (!img) return null;
+
+  const candidates = [img.getAttribute("data-old-hires"), img.getAttribute("src")];
+  try {
+    candidates.push(...Object.keys(JSON.parse(img.getAttribute("data-a-dynamic-image") || "{}")));
+  } catch {}
+  return candidates.find((url) => url && url.startsWith("https://")) ?? null;
 }
 
 const targetNode = document.getElementById("ppd");
