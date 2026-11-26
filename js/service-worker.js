@@ -27,7 +27,8 @@ async function track(message) {
   await chrome.storage.local.set({
     [message.asin]: {
       "title": message.title,
-      "history": [...(storedData?.history ?? []), {"date": trackDate, "price": message.price}]
+      "history": [...(storedData?.history ?? []), {"date": trackDate, "price": message.price}],
+      "image": message.image
     }
   })
 }
