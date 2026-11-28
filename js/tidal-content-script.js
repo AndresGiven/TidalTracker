@@ -23,7 +23,7 @@ async function onTrackPrice(){
   const price = extractPrice(document);
   if (!price) return;
   const title = extractTitle(document);
-  const asin = extractAsin(document);
+  const asin = extractAsin(document, window.location.pathname);
   const image = extractImage(document);
   const data = {"type": "track", "title": title,"asin": asin, "price": price, "image": image}
   const response = await chrome.runtime.sendMessage(data);

@@ -1,10 +1,10 @@
-function extractAsin(document){
+function extractAsin(document, pathname){
   const asin = document.getElementById("ASIN")
 
   if (asin && asin.value) return asin.value
 
   //asin should always exist as an element but just in case URL fallback is handy, URL check may fail with shortened links
-  const match = window.location.pathname.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})/);
+  const match = pathname.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})/);
   return match ? match[1] : null;
 }
 function extractPrice(document) {
